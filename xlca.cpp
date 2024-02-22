@@ -17,7 +17,7 @@ void solve(const int &Case)
     }
 
     // 倍增数组，制表
-    vector<array<int, 21>> F(n + 1);
+    vector<array<int, 21>> F(n + 1);    // 21 和给的数据有关系
     vector<int> dep(n + 1);
 
     function<void(int, int)> dfs = [&](int x, int fax)
