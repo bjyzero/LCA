@@ -6,7 +6,7 @@ void solve(const int &Case)
     int n;
     cin >> n;
 
-    //È·ÈÏºÍ x ÏàÁ¬µÄÊı(ÏòÉÏºÍÏòÏÂ) ÓĞÄÄĞ©
+    //ç¡®è®¤å’Œ x ç›¸è¿çš„æ•°(å‘ä¸Šå’Œå‘ä¸‹) æœ‰å“ªäº›
     vector<vector<int>> G(n + 1);
     for (int i = 1; i < n; ++i)
     {
@@ -16,7 +16,7 @@ void solve(const int &Case)
         G[v].push_back(u);
     }
 
-    // ±¶ÔöÊı×é£¬ÖÆ±í
+    // å€å¢æ•°ç»„ï¼Œåˆ¶è¡¨
     vector<array<int, 21>> F(n + 1);
     vector<int> dep(n + 1);
 
@@ -28,23 +28,23 @@ void solve(const int &Case)
             F[x][i] = F[F[x][i - 1]][i - 1];
         }
 
-        for (const auto &tox : G[x])
+        for (const auto &tox : G[x])    // éå†å’Œ x æœ‰å…³çš„æ‰€æœ‰ç»“ç‚¹
         {
-            if (tox == fax)
+            if (tox == fax)    // ç¡®ä¿ä¸æ˜¯å‘ä¸Šçš„çˆ¶ç»“ç‚¹
                 continue;
             dep[tox] = dep[x] + 1;
             dfs(tox, x);
         }
     };
 
-    dfs(1, 0);
+    dfs(1, 0);    // dfs()ä¸­ 1 æ˜¯å› ä¸ºæ ¹èŠ‚ç‚¹ä¸º 1 å·èŠ‚ç‚¹
 
     auto glca = [&](int x, int y)
     {
         if (dep[x] < dep[y])
             swap(x, y);
 
-        // ½« x Ìøµ½ºÍ y ÏàÍ¬µÄÉî¶È
+        // å°† x è·³åˆ°å’Œ y ç›¸åŒçš„æ·±åº¦
         int d = dep[x] - dep[y];
         for (int i = 20; i >= 0; --i)
         {
@@ -55,10 +55,10 @@ void solve(const int &Case)
         if (x == y)
             return x;
 
-        // Ñ­»·Ë³Ğò²»ÄÜ±ä£¬±ØĞëµ¹Ğò
+        // å¾ªç¯é¡ºåºä¸èƒ½å˜ï¼Œå¿…é¡»å€’åº
         for (int i = 20; i >= 0; --i)
         {
-            if (F[x][i] != F[y][i])
+            if (F[x][i] != F[y][i])    // x å’Œ y ä¸€èµ·å‘ä¸Šè·³ï¼Œä½†æ˜¯ä¸èƒ½é‡åˆ
             {
                 x = F[x][i];
                 y = F[y][i];
